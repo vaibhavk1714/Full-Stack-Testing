@@ -1,3 +1,5 @@
+import '../styles/css2.css';
+
 document.querySelector("#plusbutton").addEventListener("click", function () {
     console.log("Inside");
     document.querySelector(".popup").classList.add("active");

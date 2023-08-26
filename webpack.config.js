@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
   },
   output: {
     filename: 'js/[name].bundle.js',    // Dynamic output filenames based on entry names
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
   },
   module: {
     rules: [
@@ -21,7 +22,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
         ],
-        include: path.resolve(__dirname, 'client/styles'), // Adjust the path
+        include: path.resolve('client/styles'), // Adjust the path
       },
       {
         test: /\.(png|jpg|gif|svg|mp4)$/,
@@ -33,6 +34,7 @@ module.exports = {
             },
           },
         ],
+        include: path.resolve('client/images'), // Adjust the path
       },
     ],
   },
@@ -76,5 +78,10 @@ module.exports = {
           filename: '/pages/login.html',    // Output filename for about.html
           chunks: ['other'],         // Include only the other entry's bundle
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: './client/images', to: './assets' } // Adjust the source and destination paths as needed
+            ]
+        })
   ],
 };
