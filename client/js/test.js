@@ -1,3 +1,6 @@
+import '../styles/index.css';
+import '../styles/css2.css';
+
 document.querySelector("#show-login").addEventListener("click", function () {
   console.log("1")
     document.querySelector(".popup").classList.add("active");
